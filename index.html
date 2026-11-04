@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -79,6 +79,11 @@
         .editorial-shadow {
             box-shadow: 0 20px 40px -15px rgba(109, 104, 117, 0.07);
         }
+
+        /* Lectura de artículos (vista interna) */
+        .article-enter{animation:articleIn .7s cubic-bezier(.22,1,.36,1) both}
+        @keyframes articleIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+        @media (prefers-reduced-motion:reduce){.article-enter{animation:none}}
     </style>
 </head>
 <body class="bg-brand-bg text-brand-dark font-sans antialiased selection:bg-brand-300 selection:text-white">
@@ -340,100 +345,8 @@
                 <div class="w-16 h-0.5 bg-brand-300 mx-auto mt-4"></div>
             </div>
 
-            <!-- Articles Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                
-                <!-- Article 1 -->
-                <article class="bg-brand-bg rounded-2xl overflow-hidden border border-brand-100 flex flex-col hover:border-brand-300 transition-all duration-300 editorial-shadow group">
-                    <div class="relative h-60 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=800&q=80" alt="Outfit lluvia" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <span class="absolute top-4 left-4 bg-brand-dark/80 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full">
-                            Lluvia & Estilo
-                        </span>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center text-xs text-brand-400 mb-3 space-x-3">
-                                <span><i class="far fa-calendar-alt mr-1"></i> Hoy</span>
-                                <span>•</span>
-                                <span><i class="far fa-clock mr-1"></i> 3 min lectura</span>
-                            </div>
-                            <h3 class="font-serif text-xl font-bold text-brand-dark mb-3 group-hover:text-brand-400 transition-colors">
-                                Cómo vestir elegante en un día lluvioso sin arruinar tus zapatos
-                            </h3>
-                            <p class="text-xs text-brand-500 leading-relaxed line-clamp-3">
-                                Descubre las mejores alternativas de calzado impermeable y abrigos estilizados para mantener la sofisticación intacta durante días grises.
-                            </p>
-                        </div>
-                        <div class="pt-6 border-t border-brand-100 mt-6 flex items-center justify-between">
-                            <a href="#" class="text-xs font-bold uppercase tracking-wider text-brand-400 hover:text-brand-dark flex items-center group-hover:translate-x-1 transition-transform">
-                                Leer artículo <i class="fas fa-arrow-right ml-2 text-[10px]"></i>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Article 2 -->
-                <article class="bg-brand-bg rounded-2xl overflow-hidden border border-brand-100 flex flex-col hover:border-brand-300 transition-all duration-300 editorial-shadow group">
-                    <div class="relative h-60 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80" alt="Básicos de armario" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <span class="absolute top-4 left-4 bg-brand-dark/80 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full">
-                            Armario Cápsula
-                        </span>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center text-xs text-brand-400 mb-3 space-x-3">
-                                <span><i class="far fa-calendar-alt mr-1"></i> Ayer</span>
-                                <span>•</span>
-                                <span><i class="far fa-clock mr-1"></i> 5 min lectura</span>
-                            </div>
-                            <h3 class="font-serif text-xl font-bold text-brand-dark mb-3 group-hover:text-brand-400 transition-colors">
-                                5 Básicos de tono tierra que puedes combinar en más de 10 looks
-                            </h3>
-                            <p class="text-xs text-brand-500 leading-relaxed line-clamp-3">
-                                Maximizamos tu armario enseñándote la fórmula exacta para multiplicar tus outfits de la semana usando solo 5 prendas neutras.
-                            </p>
-                        </div>
-                        <div class="pt-6 border-t border-brand-100 mt-6 flex items-center justify-between">
-                            <a href="#" class="text-xs font-bold uppercase tracking-wider text-brand-400 hover:text-brand-dark flex items-center group-hover:translate-x-1 transition-transform">
-                                Leer artículo <i class="fas fa-arrow-right ml-2 text-[10px]"></i>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Article 3 -->
-                <article class="bg-brand-bg rounded-2xl overflow-hidden border border-brand-100 flex flex-col hover:border-brand-300 transition-all duration-300 editorial-shadow group">
-                    <div class="relative h-60 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80" alt="Tendencia botas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <span class="absolute top-4 left-4 bg-brand-dark/80 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full">
-                            Tendencias
-                        </span>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center text-xs text-brand-400 mb-3 space-x-3">
-                                <span><i class="far fa-calendar-alt mr-1"></i> Hace 3 días</span>
-                                <span>•</span>
-                                <span><i class="far fa-clock mr-1"></i> 4 min lectura</span>
-                            </div>
-                            <h3 class="font-serif text-xl font-bold text-brand-dark mb-3 group-hover:text-brand-400 transition-colors">
-                                El regreso de las botas altas con vestidos cortos: Guía visual
-                            </h3>
-                            <p class="text-xs text-brand-500 leading-relaxed line-clamp-3">
-                                Analizamos el equilibrio perfecto de proporciones para llevar botas altas en climas templados manteniendo un perfil refinado.
-                            </p>
-                        </div>
-                        <div class="pt-6 border-t border-brand-100 mt-6 flex items-center justify-between">
-                            <a href="#" class="text-xs font-bold uppercase tracking-wider text-brand-400 hover:text-brand-dark flex items-center group-hover:translate-x-1 transition-transform">
-                                Leer artículo <i class="fas fa-arrow-right ml-2 text-[10px]"></i>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-            </div>
+            <!-- Articles Grid: las tarjetas se generan automáticamente desde la lista ARTICLES (ver script "articles-data") -->
+            <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
         </div>
     </section>
 
@@ -607,6 +520,47 @@
         </div>
     </main>
 
+    <!-- VISTA DE LECTURA DE ARTÍCULO (se rellena desde ARTICLES) -->
+    <main id="article-view" class="hidden-view">
+        <section class="bg-gradient-to-b from-brand-100/40 to-brand-bg pt-10 pb-12 border-b border-brand-100">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <a href="#inicio" class="btn-anim inline-flex items-center text-xs font-semibold uppercase tracking-widest text-brand-400 hover:text-brand-dark mb-8"><i class="fas fa-arrow-left mr-2"></i> Volver al inicio</a>
+                <div>
+                    <span id="article-category" class="inline-block bg-brand-dark/80 text-white text-[10px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full"></span>
+                </div>
+                <h1 id="article-title" class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-brand-dark mt-5"></h1>
+                <div class="flex items-center text-xs text-brand-400 mt-5 space-x-3">
+                    <span><i class="far fa-calendar-alt mr-1"></i> <span id="article-date"></span></span>
+                    <span>•</span>
+                    <span><i class="far fa-clock mr-1"></i> <span id="article-time"></span></span>
+                </div>
+                <div class="w-16 h-0.5 bg-brand-300 mt-6"></div>
+            </div>
+        </section>
+
+        <div id="article-content" class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <img id="article-hero" src="" alt="" class="w-full h-64 sm:h-96 object-cover rounded-3xl editorial-shadow mb-10">
+            <p id="article-lead" class="font-serif text-xl sm:text-2xl italic text-brand-400 leading-relaxed mb-8"></p>
+            <div id="article-body"></div>
+
+            <div class="mt-14 pt-8 border-t border-brand-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <a href="#inicio" class="btn-anim w-full sm:w-auto text-center bg-brand-500 hover:bg-brand-dark text-white font-medium px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 text-sm uppercase tracking-wider"><i class="fas fa-arrow-left mr-2"></i> Volver al inicio</a>
+                <a href="#articulos" class="btn-anim w-full sm:w-auto text-center bg-white border border-brand-300 text-brand-500 hover:bg-brand-100/30 font-medium px-6 py-4 rounded-full transition-all text-sm">Ver todas las guías</a>
+            </div>
+        </div>
+
+        <section id="article-related" class="py-16 bg-white border-t border-brand-100">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10">
+                    <span class="text-xs uppercase tracking-widest font-bold text-brand-400">Sigue leyendo</span>
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-dark mt-1">Más guías de estilo</h2>
+                    <div class="w-12 h-0.5 bg-brand-300 mx-auto mt-3"></div>
+                </div>
+                <div id="article-related-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-6"></div>
+            </div>
+        </section>
+    </main>
+
     <footer id="site-footer" class="bg-brand-dark text-white pt-16 pb-12 border-t border-brand-500/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -658,6 +612,157 @@
             </div>
         </div>
     </footer>
+
+    <!-- ARTÍCULOS DEL BLOG: aquí vive todo el contenido -->
+    <script id="articles-data">
+        /* =====================================================================
+           CÓMO AÑADIR UNA PUBLICACIÓN NUEVA
+           1. Copia un bloque completo { ... }, desde "{" hasta "}," y pégalo AL
+              PRINCIPIO de la lista ARTICLES (las más recientes van primero).
+           2. Cambia el "id": debe ser único, en minúsculas, sin espacios ni tildes
+              (ej. "outfit-oficina-verano"). Será la dirección: #articulo/<id>
+           3. Edita los textos y la imagen. La tarjeta del inicio, el botón
+              "Leer artículo" y la página del artículo se crean solos.
+
+           Campos: id, category, date, readTime, title, excerpt (resumen de la tarjeta),
+                   image (usa una URL con "w=800"), alt, lead (frase de entrada) y
+                   content (lista de bloques del cuerpo).
+
+           Tipos de bloque para "content":
+             { t: 'h2',   text: 'Subtítulo' }
+             { t: 'p',    text: 'Párrafo (puedes usar <strong>negrita</strong> y <em>cursiva</em>)' }
+             { t: 'ul',   items: ['Punto 1', 'Punto 2'] }            lista con viñetas
+             { t: 'ol',   items: ['Paso 1', 'Paso 2'] }              lista numerada
+             { t: 'grid', items: [{ title: 'Título', text: 'Texto' }, ...] }   tarjetas
+             { t: 'tip',  title: 'Consejo', text: 'Texto destacado' }
+
+           Importante: no uses comillas dobles " dentro de los textos (usa « » o comillas
+           simples escapadas) y separa cada elemento con coma.
+           ===================================================================== */
+        const ARTICLES = [
+            {
+                id: 'vestir-elegante-dia-lluvioso',
+                category: 'Lluvia & Estilo',
+                date: 'Hoy',
+                readTime: '3 min lectura',
+                title: 'Cómo vestir elegante en un día lluvioso sin arruinar tus zapatos',
+                excerpt: 'Descubre las mejores alternativas de calzado impermeable y abrigos estilizados para mantener la sofisticación intacta durante días grises.',
+                image: 'https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=800&q=80',
+                alt: 'Outfit lluvia',
+                lead: 'Un día de lluvia no tiene por qué significar renunciar a un look cuidado. Con unas pocas decisiones acertadas en calzado, abrigo y tejidos, puedes mantener una imagen sofisticada y llegar con los zapatos intactos.',
+                content: [
+                    { t: 'h2', text: '1. Empieza por el calzado' },
+                    { t: 'p', text: 'Los zapatos son lo primero que sufre con el agua, así que conviene elegirlos con criterio. Las suelas de goma ofrecen mejor agarre sobre superficies mojadas y aíslan el pie de la humedad; las suelas finas de cuero, en cambio, absorben el agua y se deterioran con rapidez.' },
+                    { t: 'ul', items: [
+                        '<strong>Botines Chelsea de cuero tratado:</strong> sobrios, fáciles de combinar y con una caña que protege el tobillo.',
+                        '<strong>Botas de agua estilizadas:</strong> las versiones de líneas limpias y caña media, en negro, verde oscuro o tonos tierra, se integran con faldas midi y pantalones rectos.',
+                        '<strong>Mocasines con suela de goma:</strong> una opción ligera para lloviznas, siempre que el cuero esté protegido.',
+                        '<strong>El plan B en el bolso:</strong> si tu look pide zapatos delicados, lleva unas bailarinas plegables o cambia el calzado al llegar a tu destino.'
+                    ] },
+                    { t: 'p', text: 'Antes de salir, aplica un spray impermeabilizante específico para cuero o ante. Hazlo con el zapato limpio y seco, y repite el tratamiento de forma periódica.' },
+                    { t: 'h2', text: '2. Elige un abrigo que trabaje contigo' },
+                    { t: 'p', text: 'Un buen abrigo para la lluvia debe proteger sin restar elegancia. Estas son las opciones más fiables:' },
+                    { t: 'grid', items: [
+                        { title: 'Gabardina clásica', text: 'En beige, camel o negro, con cinturón para marcar la cintura. Combina con casi todo y resiste lluvias ligeras.' },
+                        { title: 'Parka corta', text: 'Con capucha y tejido técnico, ideal para trayectos largos. Elige cortes limpios y colores neutros.' },
+                        { title: 'Abrigo repelente', text: 'Las mezclas de algodón tratadas repelen el agua sin el aspecto plástico de un impermeable tradicional.' }
+                    ] },
+                    { t: 'h2', text: '3. Cuida los largos y los tejidos' },
+                    { t: 'p', text: 'Los bajos largos se arrastran por los charcos y quedan empapados. Los pantalones rectos que terminan justo en el tobillo, las faldas midi que dejan libre la caña de la bota y los vestidos a media pierna son grandes aliados.' },
+                    { t: 'p', text: 'En cuanto a los tejidos, prioriza la lana fina, el punto grueso y las mezclas de secado rápido. Evita las telas muy claras o delicadas, como el lino o la seda sin forro, que delatan cada gota.' },
+                    { t: 'h2', text: '4. Accesorios con sentido práctico' },
+                    { t: 'ul', items: [
+                        'Un paraguas compacto, liso y de tono oscuro, que resulta discreto y combina con cualquier conjunto.',
+                        'Un bolso de cuero tratado o de material resistente al agua, preferiblemente con cierre, para proteger tus pertenencias.',
+                        'Un pañuelo o gorro de tejido tupido que abrigue sin deformar el peinado.'
+                    ] },
+                    { t: 'tip', title: 'Fórmula rápida', text: 'Gabardina + pantalón recto tobillero + botines Chelsea + bolso con cierre. Cuatro decisiones y un look listo en minutos, sin sacrificar estilo.' },
+                    { t: 'p', text: 'La clave está en anticiparse: revisa el pronóstico la noche anterior, deja preparado el calzado adecuado y elige prendas que soporten la humedad. Así, los días grises se convierten en una oportunidad más para lucir un estilo impecable.' }
+                ]
+            },
+            {
+                id: 'basicos-tono-tierra-10-looks',
+                category: 'Armario Cápsula',
+                date: 'Ayer',
+                readTime: '5 min lectura',
+                title: '5 Básicos de tono tierra que puedes combinar en más de 10 looks',
+                excerpt: 'Maximizamos tu armario enseñándote la fórmula exacta para multiplicar tus outfits de la semana usando solo 5 prendas neutras.',
+                image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
+                alt: 'Básicos de armario',
+                lead: 'Una cápsula bien pensada no se mide por la cantidad de prendas, sino por las combinaciones que permite. Con cinco básicos en tonos tierra que dialogan entre sí, puedes resolver gran parte de tu semana sin repetir el mismo look.',
+                content: [
+                    { t: 'h2', text: 'Por qué funcionan los tonos tierra' },
+                    { t: 'p', text: 'Los neutros cálidos (crudo, arena, camel, chocolate o terracota) comparten una base de color parecida, de modo que se mezclan entre sí con naturalidad. No tienes que preguntarte si una prenda «va» con otra: la armonía ya viene incorporada.' },
+                    { t: 'p', text: 'Además, este tipo de paleta atraviesa las temporadas con facilidad y envejece mejor que las tendencias de color pasajeras, lo que la convierte en una inversión inteligente para tu armario.' },
+                    { t: 'h2', text: 'Las 5 prendas esenciales' },
+                    { t: 'ol', items: [
+                        '<strong>Camisa o blusa crema:</strong> aporta luz al rostro y funciona sola, bajo un jersey o con un blazer.',
+                        '<strong>Pantalón recto camel:</strong> de corte limpio y tiro cómodo; sirve tanto para la oficina como para el fin de semana.',
+                        '<strong>Jersey de punto color chocolate:</strong> la prenda de abrigo y textura, que añade profundidad al conjunto.',
+                        '<strong>Blazer arena o taupe:</strong> estructura cualquier combinación y la eleva de inmediato.',
+                        '<strong>Falda midi terracota:</strong> el toque de color cálido que rompe la monotonía sin salirse de la paleta.'
+                    ] },
+                    { t: 'h2', text: 'Más de 10 combinaciones con solo cinco piezas' },
+                    { t: 'p', text: 'Estas son las fórmulas que puedes armar sin comprar nada más (usa la numeración de arriba como referencia: camisa, pantalón, jersey, blazer y falda):' },
+                    { t: 'ol', items: [
+                        'Camisa crema + pantalón camel: una base limpia para un café o una reunión informal.',
+                        'Camisa crema + falda terracota: contraste suave entre luz y color.',
+                        'Jersey chocolate + pantalón camel: look tono sobre tono, cálido y cómodo.',
+                        'Jersey chocolate + falda terracota: propuesta otoñal con mucha textura.',
+                        'Camisa crema + pantalón camel + blazer arena: la versión más formal para la oficina.',
+                        'Camisa crema + falda terracota + blazer arena: elegante para una cena.',
+                        'Jersey chocolate + pantalón camel + blazer arena: capas ricas para días frescos.',
+                        'Jersey chocolate + falda terracota + blazer arena: sofisticado sin esfuerzo.',
+                        'Camisa crema con el cuello asomando bajo el jersey chocolate + pantalón camel: efecto de capas clásico.',
+                        'Camisa crema con el cuello asomando bajo el jersey chocolate + falda terracota: ideal para la media estación.',
+                        'Jersey chocolate anudado sobre los hombros + camisa crema + pantalón camel: toque relajado para el fin de semana.'
+                    ] },
+                    { t: 'tip', title: 'Juega con las texturas', text: 'Si todas tus prendas son lisas, introduce interés con texturas: punto grueso, algodón, lino o cuero. Mismo color, mirada distinta.' },
+                    { t: 'h2', text: 'Cómo completar el look' },
+                    { t: 'p', text: 'Para que la cápsula funcione a diario, elige calzado neutro y versátil: zapatillas blancas, botines marrones o mocasines. En los accesorios, las joyas finas en dorado y un bolso estructurado en tono caramelo o negro refuerzan la sofisticación sin recargar.' },
+                    { t: 'p', text: 'Con esta base, tu armario deja de ser un lugar de dudas matutinas y se convierte en un sistema: cada prenda tiene al menos tres o cuatro formas de ser usada.' }
+                ]
+            },
+            {
+                id: 'botas-altas-vestidos-cortos-guia-visual',
+                category: 'Tendencias',
+                date: 'Hace 3 días',
+                readTime: '4 min lectura',
+                title: 'El regreso de las botas altas con vestidos cortos: Guía visual',
+                excerpt: 'Analizamos el equilibrio perfecto de proporciones para llevar botas altas en climas templados manteniendo un perfil refinado.',
+                image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80',
+                alt: 'Tendencia botas',
+                lead: 'Las botas altas vuelven a tomar protagonismo, y esta vez lo hacen acompañadas de vestidos cortos. La combinación resulta favorecedora siempre que se cuide el equilibrio de proporciones.',
+                content: [
+                    { t: 'h2', text: 'La regla de las proporciones' },
+                    { t: 'p', text: 'Cuando una prenda ocupa mucho espacio visual, la otra debe aportar equilibrio. Una bota alta y ajustada pide un vestido de volumen controlado, mientras que una bota más holgada se lleva mejor con un vestido entallado.' },
+                    { t: 'h2', text: 'Guía visual: elige tu bota según el largo' },
+                    { t: 'grid', items: [
+                        { title: 'Sobre la rodilla', text: 'Alarga la silueta. Combínala con vestidos cortos de línea recta o trapecio y un abrigo que llegue a media pierna.' },
+                        { title: 'Hasta la rodilla', text: 'La más versátil. Funciona con vestidos camiseros, de punto o con una falda ligeramente evasé.' },
+                        { title: 'Media caña', text: 'Perfecta para climas templados. Queda muy bien con vestidos cortos fluidos y medias finas.' }
+                    ] },
+                    { t: 'h2', text: 'Cuida el tramo entre el vestido y la bota' },
+                    { t: 'p', text: 'Dejar un espacio de piel visible es una decisión de estilo válida, pero si prefieres un efecto continuo, usa medias opacas o semiopacas en un tono cercano al de la bota. Así la pierna se ve más larga y el conjunto resulta más sobrio.' },
+                    { t: 'h2', text: 'Climas templados: materiales y colores' },
+                    { t: 'ul', items: [
+                        '<strong>Cuero flexible o ante fino:</strong> se adaptan al pie y no resultan pesados cuando sube la temperatura.',
+                        '<strong>Cañas con elástico o cremallera lateral:</strong> facilitan el ajuste y evitan que la bota se arrugue o caiga.',
+                        '<strong>Tonos neutros:</strong> el negro, el chocolate y el camel son los más fáciles de combinar; los tonos tierra suavizan el contraste en entretiempo.',
+                        '<strong>Tacón bajo o de bloque:</strong> aporta comodidad y mantiene la línea estilizada durante todo el día.'
+                    ] },
+                    { t: 'tip', title: 'Equilibrio en tres pasos', text: 'Elige una pieza protagonista (la bota o el vestido), mantén la otra sencilla y termina con una capa exterior que caiga a media distancia entre ambas.' },
+                    { t: 'h2', text: 'Errores que conviene evitar' },
+                    { t: 'ul', items: [
+                        'Combinar una bota muy llamativa con un vestido de estampado intenso: compiten entre sí.',
+                        'Elegir una caña que no se ajusta a la pantorrilla y se desliza o forma pliegues.',
+                        'Olvidar la capa exterior: un blazer, una chaqueta corta o un abrigo ligero completan el look y aportan estructura.'
+                    ] },
+                    { t: 'p', text: 'Con estas pautas, las botas altas y los vestidos cortos se convierten en una combinación de gran impacto y fácil de repetir. Lo importante es probar frente al espejo y ajustar hasta que la silueta se vea equilibrada.' }
+                ]
+            }
+        ];
+    </script>
 
     <!-- Vanilla JavaScript Functionality -->
     <script>
@@ -727,23 +832,130 @@
             }
         }
 
-        // 5. Pestaña de Avisos Legales (vista separada del home)
+        // 5. Vistas separadas del home: Avisos Legales y lectura de artículos
         const homeView = document.getElementById('home-view');
         const legalView = document.getElementById('legal-view');
+        const articleView = document.getElementById('article-view');
         const legalIds = ['avisos-legales', 'propiedad-intelectual', 'politica-privacidad'];
         const homeTitle = document.title;
         function route() {
             const id = decodeURIComponent(location.hash.slice(1));
             const isLegal = legalIds.includes(id);
-            homeView.classList.toggle('hidden-view', isLegal);
+
+            // Artículos: la dirección es #articulo/<id>
+            const slug = id.startsWith(ARTICLE_PREFIX) ? id.slice(ARTICLE_PREFIX.length) : null;
+            const article = slug ? ARTICLES.find(a => a.id === slug) : null;
+            if (slug && !article) { location.replace('#articulos'); return; } // artículo inexistente: vuelve a la lista
+
+            homeView.classList.toggle('hidden-view', isLegal || !!article);
             legalView.classList.toggle('hidden-view', !isLegal);
-            document.title = isLegal ? 'Avisos Legales | Trama Style' : homeTitle;
-            const target = id && id !== 'avisos-legales' ? document.getElementById(id) : null;
+            articleView.classList.toggle('hidden-view', !article);
+            if (article) renderArticle(article);
+
+            document.title = isLegal ? 'Avisos Legales | Trama Style'
+                : article ? article.title + ' | Trama Style' : homeTitle;
+            const target = !article && id && id !== 'avisos-legales' ? document.getElementById(id) : null;
             if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             else window.scrollTo({ top: 0 });
-            if (!isLegal) revealAll();
+            if (!isLegal && !article) revealAll();
         }
         window.addEventListener('hashchange', route);
+
+        // 5b. Artículos del blog: tarjetas del inicio y página de lectura (se generan desde ARTICLES)
+        const ARTICLE_PREFIX = 'articulo/';
+        const articleHref = a => '#' + ARTICLE_PREFIX + a.id;
+        const heroImage = a => a.image.replace('w=800', 'w=1400');
+
+        function renderCard(a) {
+            const href = articleHref(a);
+            return `
+                <article class="bg-brand-bg rounded-2xl overflow-hidden border border-brand-100 flex flex-col hover:border-brand-300 transition-all duration-300 editorial-shadow group">
+                    <a href="${href}" class="relative h-60 overflow-hidden block" aria-label="Leer: ${a.title}">
+                        <img src="${a.image}" alt="${a.alt}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 left-4 bg-brand-dark/80 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full">
+                            ${a.category}
+                        </span>
+                    </a>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center text-xs text-brand-400 mb-3 space-x-3">
+                                <span><i class="far fa-calendar-alt mr-1"></i> ${a.date}</span>
+                                <span>•</span>
+                                <span><i class="far fa-clock mr-1"></i> ${a.readTime}</span>
+                            </div>
+                            <h3 class="font-serif text-xl font-bold text-brand-dark mb-3 group-hover:text-brand-400 transition-colors">
+                                <a href="${href}">${a.title}</a>
+                            </h3>
+                            <p class="text-xs text-brand-500 leading-relaxed line-clamp-3">
+                                ${a.excerpt}
+                            </p>
+                        </div>
+                        <div class="pt-6 border-t border-brand-100 mt-6 flex items-center justify-between">
+                            <a href="${href}" class="text-xs font-bold uppercase tracking-wider text-brand-400 hover:text-brand-dark flex items-center group-hover:translate-x-1 transition-transform">
+                                Leer artículo <i class="fas fa-arrow-right ml-2 text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>`;
+        }
+
+        function renderBlocks(blocks) {
+            return blocks.map(b => {
+                switch (b.t) {
+                    case 'h2':
+                        return `<h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-dark mt-12 mb-4">${b.text}</h2>`;
+                    case 'p':
+                        return `<p class="text-base sm:text-lg text-brand-500 leading-relaxed mb-5">${b.text}</p>`;
+                    case 'ul':
+                        return `<ul class="space-y-3 mb-6 text-base sm:text-lg text-brand-500 leading-relaxed">${b.items.map(i =>
+                            `<li class="flex gap-3"><i class="fas fa-check text-brand-400 text-xs mt-2.5"></i><span>${i}</span></li>`).join('')}</ul>`;
+                    case 'ol':
+                        return `<ol class="space-y-4 mb-6 text-base sm:text-lg text-brand-500 leading-relaxed">${b.items.map((i, n) =>
+                            `<li class="flex gap-4"><span class="flex-none w-7 h-7 mt-0.5 rounded-full bg-brand-100 text-brand-400 text-xs font-bold flex items-center justify-center">${n + 1}</span><span>${i}</span></li>`).join('')}</ol>`;
+                    case 'grid':
+                        return `<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8">${b.items.map(i =>
+                            `<div class="p-5 rounded-2xl bg-white border border-brand-100 editorial-shadow"><h3 class="font-serif text-lg font-semibold text-brand-dark mb-2">${i.title}</h3><p class="text-sm text-brand-500 leading-relaxed">${i.text}</p></div>`).join('')}</div>`;
+                    case 'tip':
+                        return `<aside class="my-10 p-6 sm:p-8 rounded-2xl bg-brand-100/40 border border-brand-200/60"><p class="text-xs uppercase tracking-widest font-bold text-brand-400 mb-2"><i class="fas fa-lightbulb mr-2"></i>${b.title}</p><p class="font-serif text-lg text-brand-dark leading-relaxed">${b.text}</p></aside>`;
+                    default:
+                        return '';
+                }
+            }).join('');
+        }
+
+        function renderArticle(a) {
+            document.getElementById('article-category').textContent = a.category;
+            document.getElementById('article-title').textContent = a.title;
+            document.getElementById('article-date').textContent = a.date;
+            document.getElementById('article-time').textContent = a.readTime;
+            const hero = document.getElementById('article-hero');
+            hero.src = heroImage(a);
+            hero.alt = a.alt;
+            document.getElementById('article-lead').innerHTML = a.lead;
+            document.getElementById('article-body').innerHTML = renderBlocks(a.content);
+
+            const others = ARTICLES.filter(x => x.id !== a.id).slice(0, 4);
+            document.getElementById('article-related').classList.toggle('hidden', !others.length);
+            document.getElementById('article-related-grid').innerHTML = others.map(o => `
+                <a href="${articleHref(o)}" class="group flex flex-col bg-brand-bg rounded-2xl overflow-hidden border border-brand-100 hover:border-brand-300 transition-all duration-300 editorial-shadow">
+                    <div class="relative h-44 overflow-hidden">
+                        <img src="${o.image}" alt="${o.alt}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-brand-dark/80 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full">${o.category}</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-serif text-lg font-bold text-brand-dark group-hover:text-brand-400 transition-colors">${o.title}</h3>
+                        <span class="inline-flex items-center mt-3 text-xs font-bold uppercase tracking-wider text-brand-400">Leer artículo <i class="fas fa-arrow-right ml-2 text-[10px]"></i></span>
+                    </div>
+                </a>`).join('');
+
+            const content = document.getElementById('article-content');
+            content.classList.remove('article-enter');
+            void content.offsetWidth; // reinicia la animación de entrada
+            content.classList.add('article-enter');
+        }
+
+        // Dibuja las tarjetas del inicio (antes de preparar las animaciones de scroll)
+        document.getElementById('articles-grid').innerHTML = ARTICLES.map(renderCard).join('');
 
         // 6. Animaciones al bajar (botones, figuras, tarjetas)
         const tag = (sel, cls, step) => document.querySelectorAll(sel).forEach((el, i) => {
