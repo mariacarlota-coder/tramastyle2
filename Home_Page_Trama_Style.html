@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trama Style | Blog de Moda Editorial & Guías de Estilo Diario</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            100: '#FFCDB2',
+                            200: '#FFB4A2',
+                            300: '#E5989B',
+                            400: '#B5838D',
+                            500: '#6D6875',
+                            bg: '#FAF7F5',
+                            dark: '#2B262D'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>document.documentElement.classList.add('js')</script>
+    <style>
+        .hidden-view{display:none}
+        /* Animaciones al hacer scroll */
+        .js .rv{opacity:0;translate:0 30px;scale:.97;transition:opacity .9s cubic-bezier(.22,1,.36,1) var(--d,0s),translate .9s cubic-bezier(.22,1,.36,1) var(--d,0s),scale .9s cubic-bezier(.22,1,.36,1) var(--d,0s)}
+        .js .rv.in{opacity:1;translate:0 0;scale:1}
+        .js .rv-line{transform:scaleX(0);transition:transform .9s cubic-bezier(.22,1,.36,1) .25s}
+        .js .rv-line.in{transform:scaleX(1)}
+        .js .rv-pop{opacity:0;scale:.4;rotate:-18deg;transition:all .8s cubic-bezier(.34,1.56,.64,1) var(--d,0s)}
+        .js .rv-pop.in{opacity:1;scale:1;rotate:0deg}
+        .btn-anim{position:relative;overflow:hidden;isolation:isolate}
+        .btn-anim::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);transform:translateX(-120%);transition:transform .8s ease}
+        .btn-anim:hover::after{transform:translateX(120%)}
+        .btn-anim:active{scale:.97}
+        .group:hover .fa-solid,.group:hover .fas{animation:wob .6s ease}
+        @keyframes wob{30%{transform:rotate(-12deg) scale(1.15)}60%{transform:rotate(8deg) scale(1.1)}}
+        /* Banner editorial */
+        .banner{position:relative;overflow:hidden;height:clamp(540px,56vw,820px);background:linear-gradient(180deg,#F1B998,#FAC29F);color:#5b3a2f}
+        .banner-brand{position:absolute;top:clamp(16px,2.4vw,34px);left:0;right:0;text-align:center;z-index:3;font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(1.6rem,2.6vw,2.4rem);letter-spacing:.06em;line-height:1}
+        .marquee{position:absolute;left:0;right:0;top:52%;translate:0 -50%;z-index:1;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+        .marquee-track{display:flex;width:max-content;animation:slide 34s linear infinite;will-change:transform}
+        .marquee-track span{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(9.5rem,24vw,24rem);line-height:.85;letter-spacing:.01em;padding-right:.35em;white-space:nowrap;user-select:none}
+        @keyframes slide{to{transform:translateX(-50%)}}
+        .banner-model{position:absolute;z-index:2;left:52%;bottom:2%;height:88%;width:auto;translate:-50% 0;filter:drop-shadow(0 22px 22px rgba(70,35,25,.22));pointer-events:none}
+        @media (prefers-reduced-motion:reduce){.marquee-track{animation:none}.js .rv,.js .rv-pop,.js .rv-line{opacity:1;translate:none;scale:1;rotate:0deg;transform:none;transition:none}}
+
+        /* Custom scrollbar and subtle transitions */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF7F5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #B5838D;
+            border-radius: 4px;
+        }
+        .editorial-shadow {
+            box-shadow: 0 20px 40px -15px rgba(109, 104, 117, 0.07);
+        }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-dark font-sans antialiased selection:bg-brand-300 selection:text-white">
+
+    <!-- 1. HEADER / NAVIGATION BAR -->
+    <header class="sticky top-0 z-50 bg-brand-bg/90 backdrop-blur-md border-b border-brand-200/40 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <a href="#" class="font-serif text-2xl md:text-3xl tracking-wider font-bold text-brand-dark hover:opacity-80 transition-opacity">
+                TRAMA<span class="font-light italic text-brand-400">STYLE</span>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8 text-sm font-medium tracking-wide">
+                <a href="#inicio" class="text-brand-dark hover:text-brand-400 transition-colors py-1 border-b-2 border-brand-400">Inicio</a>
+                <a href="#tendencias" class="text-brand-500 hover:text-brand-400 transition-colors py-1 border-b-2 border-transparent hover:border-brand-300">Tendencias</a>
+                <a href="#clima" class="text-brand-500 hover:text-brand-400 transition-colors py-1 border-b-2 border-transparent hover:border-brand-300">Clima & Outfits</a>
+                <a href="#articulos" class="text-brand-500 hover:text-brand-400 transition-colors py-1 border-b-2 border-transparent hover:border-brand-300">Artículos</a>
+                <a href="#contacto" class="text-brand-500 hover:text-brand-400 transition-colors py-1 border-b-2 border-transparent hover:border-brand-300">Contacto</a>
+            </nav>
+
+            <!-- Social Links & Action -->
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="https://pin.it/3wLqZhxrK" target="_blank" rel="noopener noreferrer" aria-label="Pinterest de Trama Style" class="w-9 h-9 rounded-full bg-brand-100 flex items-center justify-center text-brand-500 hover:bg-brand-300 hover:text-white transition-all">
+                    <i class="fab fa-pinterest-p text-sm"></i>
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="text-brand-dark p-2 rounded-md focus:outline-none" aria-label="Abrir Menú">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-bg border-b border-brand-200 px-4 pt-2 pb-6 space-y-3 shadow-lg">
+            <a href="#inicio" class="block px-3 py-2 text-base font-medium text-brand-dark hover:bg-brand-100/50 rounded-md">Inicio</a>
+            <a href="#tendencias" class="block px-3 py-2 text-base font-medium text-brand-500 hover:bg-brand-100/50 rounded-md">Tendencias</a>
+            <a href="#clima" class="block px-3 py-2 text-base font-medium text-brand-500 hover:bg-brand-100/50 rounded-md">Clima & Outfits</a>
+            <a href="#articulos" class="block px-3 py-2 text-base font-medium text-brand-500 hover:bg-brand-100/50 rounded-md">Artículos</a>
+            <a href="#contacto" class="block px-3 py-2 text-base font-medium text-brand-500 hover:bg-brand-100/50 rounded-md">Contacto</a>
+            <div class="pt-4 flex items-center justify-between border-t border-brand-200/50">
+                <a href="https://pin.it/3wLqZhxrK" target="_blank" rel="noopener noreferrer" class="text-brand-500 flex items-center space-x-2 text-sm">
+                    <i class="fab fa-pinterest-p"></i> <span>Pinterest</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div id="home-view">
+
+    <!-- 2. HERO SECTION (Impact Banner Editorial) -->
+    <section id="inicio" class="relative bg-gradient-to-b from-brand-bg via-brand-100/20 to-brand-bg pt-8 pb-16 md:py-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Text Column -->
+                <div class="lg:col-span-6 z-10 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-300/20 text-brand-500 text-xs font-medium uppercase tracking-widest">
+                        <span class="w-2 h-2 rounded-full bg-brand-400 animate-pulse"></span>
+                        Guía Diaria de Estilo
+                    </div>
+                    <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-brand-dark">
+                        Moda real para el <span class="italic font-normal text-brand-400">día a día.</span>
+                    </h1>
+                    <p class="text-base sm:text-lg text-brand-500 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
+                        Guías de estilo inteligentes, outfits adaptados a las condiciones reales de tu clima y combinaciones pensadas para maximizar las prendas que ya tienes.
+                    </p>
+                    <div class="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#articulos" class="w-full sm:w-auto text-center bg-brand-500 hover:bg-brand-dark text-white font-medium px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 text-sm uppercase tracking-wider">
+                            Explorar Outfits de Hoy
+                        </a>
+                        <a href="#clima" class="w-full sm:w-auto text-center bg-white border border-brand-300 text-brand-500 hover:bg-brand-100/30 font-medium px-6 py-4 rounded-full transition-all text-sm">
+                            <i class="fas fa-cloud-sun text-brand-400 mr-2"></i> Ver según mi clima
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Image Column with Integrated Typography -->
+                <div class="lg:col-span-6 relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <!-- Background Decorative Backdrop -->
+                        <div class="absolute inset-0 bg-brand-300/30 rounded-3xl transform rotate-2 scale-95 filter blur-sm"></div>
+                        
+                        <!-- Main Card / Image Frame -->
+                        <div class="relative bg-brand-300/40 rounded-3xl p-4 sm:p-6 overflow-hidden border border-white/60 shadow-2xl">
+                            <div class="relative h-[450px] sm:h-[520px] rounded-2xl overflow-hidden flex items-end justify-center">
+                                
+                                <!-- Background Image (Model in brown outfit) -->
+                                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=80" 
+                                     alt="Look recomendado de Trama Style" 
+                                     class="absolute inset-0 w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700">
+                                
+                                <!-- Integrated Background Editorial Typography -->
+                                <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-25">
+                                    <span class="font-serif text-7xl sm:text-9xl font-extrabold text-white tracking-widest select-none">
+                                        TRAMA
+                                    </span>
+                                </div>
+                                
+                                <!-- Floating Badge Overlay -->
+                                <div class="relative z-10 mb-6 bg-white/85 backdrop-blur-md px-6 py-3.5 rounded-2xl shadow-xl max-w-xs text-center border border-white/40">
+                                    <p class="text-xs uppercase tracking-widest font-bold text-brand-400">Look recomendado</p>
+                                    <p class="font-serif text-sm font-semibold text-brand-dark">Estilo editorial de temporada</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- BANNER EDITORIAL (titulo en movimiento, modelo estatica) -->
+    <section id="editorial" class="banner" aria-label="Trama Style editorial">
+        <div class="banner-brand rv">TRAMA STYLE</div>
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee-track">
+                <span>TRAMA STYLE</span><span>TRAMA STYLE</span><span>TRAMA STYLE</span><span>TRAMA STYLE</span>
+                <span>TRAMA STYLE</span><span>TRAMA STYLE</span><span>TRAMA STYLE</span><span>TRAMA STYLE</span>
+            </div>
+        </div>
+        <img class="banner-model" src="data:image/webp;base64,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" alt="Modelo de Trama Style caminando con capa y botas altas" width="314" height="630">
+    </section>
+
+    <!-- 3. DIFFERENTIATOR SECTION (Por qué seguirnos - 3 Cards) -->
+    <section class="py-16 bg-white border-y border-brand-100/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-dark">Por qué consultar Trama Style</h2>
+                <div class="w-12 h-0.5 bg-brand-300 mx-auto mt-3"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="p-8 rounded-2xl bg-brand-bg border border-brand-100 hover:border-brand-300 transition-all duration-300 editorial-shadow group">
+                    <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-400 flex items-center justify-center text-xl mb-6 group-hover:bg-brand-400 group-hover:text-white transition-colors">
+                        <i class="fas fa-cloud-sun-rain"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-semibold mb-3 text-brand-dark">Outfits según el clima</h3>
+                    <p class="text-sm text-brand-500 leading-relaxed">
+                        Guías de vestir adaptadas estrictamente a la temperatura real (calor, fresco o lluvia) para que nunca sacrifiques comodidad por estilo.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="p-8 rounded-2xl bg-brand-bg border border-brand-100 hover:border-brand-300 transition-all duration-300 editorial-shadow group">
+                    <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-400 flex items-center justify-center text-xl mb-6 group-hover:bg-brand-400 group-hover:text-white transition-colors">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-semibold mb-3 text-brand-dark">Maximiza tu clóset</h3>
+                    <p class="text-sm text-brand-500 leading-relaxed">
+                        Aprende a combinar prendas básicas y versátiles para crear outfits sofisticados sin necesidad de comprar ropa constantemente.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="p-8 rounded-2xl bg-brand-bg border border-brand-100 hover:border-brand-300 transition-all duration-300 editorial-shadow group">
+                    <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-400 flex items-center justify-center text-xl mb-6 group-hover:bg-brand-400 group-hover:text-white transition-colors">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-semibold mb-3 text-brand-dark">Decisiones rápidas</h3>
+                    <p class="text-sm text-brand-500 leading-relaxed">
+                        Inspiración al grano para resolver el constante “¿qué me pongo hoy?” en cuestión de segundos cada mañana.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. QUICK CATEGORY BLOCK / VEHICLE (Interactive Filter) -->
+    <section id="clima" class="py-16 bg-brand-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+                <div>
+                    <span class="text-xs uppercase tracking-widest font-semibold text-brand-400">Elige tu necesidad</span>
+                    <h2 class="font-serif text-3xl font-bold text-brand-dark mt-1">Categorías Rápidas & Clima</h2>
+                </div>
+                <p class="text-sm text-brand-500 max-w-md mt-2 md:mt-0">
+                    Filtra de inmediato el tipo de outfit o clima que necesitas resolver hoy.
+                </p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap gap-2 mb-8">
+                <button onclick="filterCategory('all')" class="cat-btn active bg-brand-500 text-white px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all">
+                    Todos
+                </button>
+                <button onclick="filterCategory('casual')" class="cat-btn bg-white text-brand-500 border border-brand-200 hover:bg-brand-100 px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all">
+                    Casual & Cómodo
+                </button>
+                <button onclick="filterCategory('fresco')" class="cat-btn bg-white text-brand-500 border border-brand-200 hover:bg-brand-100 px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all">
+                    🌧️ Días Frescos / Lluvia
+                </button>
+                <button onclick="filterCategory('noche')" class="cat-btn bg-white text-brand-500 border border-brand-200 hover:bg-brand-100 px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all">
+                    ✨ Cita de Noche
+                </button>
+                <button onclick="filterCategory('oficina')" class="cat-btn bg-white text-brand-500 border border-brand-200 hover:bg-brand-100 px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all">
+                    💼 Oficina & Elegante
+                </button>
+            </div>
+
+            <!-- Visual Grid Vehicle -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Vehicle Card 1 -->
+                <div class="vehicle-card category-item casual group relative h-80 rounded-2xl overflow-hidden cursor-pointer editorial-shadow">
+                    <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=600&q=80" alt="Casual" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-brand-dark/20 to-transparent p-6 flex flex-col justify-end">
+                        <span class="text-xs uppercase tracking-widest text-brand-200 font-semibold mb-1">Día a día</span>
+                        <h3 class="font-serif text-xl font-bold text-white">Casual & Chic</h3>
+                        <p class="text-xs text-white/80 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Jeans, básicos y zapatillas neutras.</p>
+                    </div>
+                </div>
+
+                <!-- Vehicle Card 2 -->
+                <div class="vehicle-card category-item fresco group relative h-80 rounded-2xl overflow-hidden cursor-pointer editorial-shadow">
+                    <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80" alt="Frescos / Lluvia" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-brand-dark/20 to-transparent p-6 flex flex-col justify-end">
+                        <span class="text-xs uppercase tracking-widest text-brand-200 font-semibold mb-1">Clima variable</span>
+                        <h3 class="font-serif text-xl font-bold text-white">Días Frescos & Lluvia</h3>
+                        <p class="text-xs text-white/80 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Gabardinas, capas y botas impermeables.</p>
+                    </div>
+                </div>
+
+                <!-- Vehicle Card 3 -->
+                <div class="vehicle-card category-item noche group relative h-80 rounded-2xl overflow-hidden cursor-pointer editorial-shadow">
+                    <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=600&q=80" alt="Noche" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-brand-dark/20 to-transparent p-6 flex flex-col justify-end">
+                        <span class="text-xs uppercase tracking-widest text-brand-200 font-semibold mb-1">Cena / Eventos</span>
+                        <h3 class="font-serif text-xl font-bold text-white">Cita de Noche</h3>
+                        <p class="text-xs text-white/80 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Vestidos midi, blazers y accesorios clave.</p>
+                    </div>
+                </div>
+
+                <!-- Vehicle Card 4 -->
+                <div class="vehicle-card category-item oficina group relative h-80 rounded-2xl overflow-hidden cursor-pointer editorial-shadow">
+                    <img src="https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?auto=format&fit=crop&w=600&q=80" alt="Oficina" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-brand-dark/20 to-transparent p-6 flex flex-col justify-end">
+                        <span class="text-xs uppercase tracking-widest text-brand-200 font-semibold mb-1">Trabajo</span>
+                        <h3 class="font-serif text-xl font-bold text-white">Oficina Elegante</h3>
+                        <p class="text-xs text-white/80 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Sastrería relajada y mocasines sobrios.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. RECENT ARTICLES FEED (Heart of the Blog) -->
+    <section id="articulos" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-xs uppercase tracking-widest font-bold text-brand-400">Lecturas Recomendadas</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-dark mt-1">Últimas Guías de Estilo</h2>
+                <div class="w-16 h-0.5 bg-brand-300 mx-auto mt-4"></div>
+            </div>
+
+            <!-- Articles Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Article 1 -->
+                <article class="bg-brand-bg rounded-2xl overflow-hidden border border-brand-100 flex flex-col hover:border-brand-300 transition-all duration-300 editorial-shadow group">
+                    <div class="relative h-60 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=800&q=80" alt="Outfit lluvia" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 left-4 bg-brand-dark/80 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full">
+                            Lluvia & Estilo
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center text-xs text-brand-400 mb-3 space-x-3">
+                                <span><i class="far fa-calendar-alt mr-1"></i> Hoy</span>
+                                <span>•</span>
+                                <span><i class="far fa-clock mr-1"></i> 3 min lectura</span>
+                            </div>
+                            <h3 class="font-serif text-xl font-bold text-brand-dark mb-3 group-hover:text-brand-400 transition-colors">
+                                Cómo vestir elegante en un día lluvioso sin arruinar tus zapatos
+                            </h3>
+                            <p class="text-xs text-brand-500 leading-relaxed line-clamp-3">
+                                Descubre las mejores alternativas de calzado impermeable y abrigos estilizados para mantener la sofisticación intacta durante días grises.
+                            </p>
+                        </div>
+                        <div class="pt-6 border-t border-brand-100 mt-6 flex items-center justify-between">
+                            <a href="#" class="text-xs font-bold uppercase tracking-wider text-brand-400 hover:text-brand-dark flex items-center group-hover:translate-x-1 transition-transform">
+                                Leer artículo <i class="fas fa-arrow-right ml-2 text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="bg-brand-bg rounded-2xl overflow-hidden border border-brand-100 flex flex-col hover:border-brand-300 transition-all duration-300 editorial-shadow group">
+                    <div class="relative h-60 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80" alt="Básicos de armario" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 left-4 bg-brand-dark/80 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full">
+                            Armario Cápsula
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center text-xs text-brand-400 mb-3 space-x-3">
+                                <span><i class="far fa-calendar-alt mr-1"></i> Ayer</span>
+                                <span>•</span>
+                                <span><i class="far fa-clock mr-1"></i> 5 min lectura</span>
+                            </div>
+                            <h3 class="font-serif text-xl font-bold text-brand-dark mb-3 group-hover:text-brand-400 transition-colors">
+                                5 Básicos de tono tierra que puedes combinar en más de 10 looks
+                            </h3>
+                            <p class="text-xs text-brand-500 leading-relaxed line-clamp-3">
+                                Maximizamos tu armario enseñándote la fórmula exacta para multiplicar tus outfits de la semana usando solo 5 prendas neutras.
+                            </p>
+                        </div>
+                        <div class="pt-6 border-t border-brand-100 mt-6 flex items-center justify-between">
+                            <a href="#" class="text-xs font-bold uppercase tracking-wider text-brand-400 hover:text-brand-dark flex items-center group-hover:translate-x-1 transition-transform">
+                                Leer artículo <i class="fas fa-arrow-right ml-2 text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="bg-brand-bg rounded-2xl overflow-hidden border border-brand-100 flex flex-col hover:border-brand-300 transition-all duration-300 editorial-shadow group">
+                    <div class="relative h-60 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80" alt="Tendencia botas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 left-4 bg-brand-dark/80 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full">
+                            Tendencias
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center text-xs text-brand-400 mb-3 space-x-3">
+                                <span><i class="far fa-calendar-alt mr-1"></i> Hace 3 días</span>
+                                <span>•</span>
+                                <span><i class="far fa-clock mr-1"></i> 4 min lectura</span>
+                            </div>
+                            <h3 class="font-serif text-xl font-bold text-brand-dark mb-3 group-hover:text-brand-400 transition-colors">
+                                El regreso de las botas altas con vestidos cortos: Guía visual
+                            </h3>
+                            <p class="text-xs text-brand-500 leading-relaxed line-clamp-3">
+                                Analizamos el equilibrio perfecto de proporciones para llevar botas altas en climas templados manteniendo un perfil refinado.
+                            </p>
+                        </div>
+                        <div class="pt-6 border-t border-brand-100 mt-6 flex items-center justify-between">
+                            <a href="#" class="text-xs font-bold uppercase tracking-wider text-brand-400 hover:text-brand-dark flex items-center group-hover:translate-x-1 transition-transform">
+                                Leer artículo <i class="fas fa-arrow-right ml-2 text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. SOCIAL PROOF / INSPIRATION SECTION (Looks destacados de la semana) -->
+    <section id="tendencias" class="py-16 bg-brand-bg border-t border-brand-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10">
+                <div>
+                    <span class="text-xs uppercase tracking-widest font-bold text-brand-400">Inspiración Semanal</span>
+                    <h2 class="font-serif text-3xl font-bold text-brand-dark mt-1">Looks Destacados de la Semana</h2>
+                </div>
+                <a href="https://pin.it/3wLqZhxrK" target="_blank" rel="noopener noreferrer" class="mt-4 sm:mt-0 text-xs font-semibold text-brand-400 hover:text-brand-500 flex items-center">
+                    Ver moodboard completo en Pinterest <i class="fab fa-pinterest-p ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Visual Grid Gallery -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div onclick="openModal('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1000&q=80', 'Look 1: Gabardina Neutra & Botas')" class="group relative h-72 rounded-2xl overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80" alt="Look destacado" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-brand-dark/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
+                        <i class="fas fa-search-plus text-2xl"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1000&q=80', 'Look 2: Sastrería Monocromática')" class="group relative h-72 rounded-2xl overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=600&q=80" alt="Look destacado" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-brand-dark/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
+                        <i class="fas fa-search-plus text-2xl"></i>
+                    </div>
+                </div>
+
+                <div onclick="openModal('https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=1000&q=80', 'Look 3: Vestido Midi & Tejidos')" class="group relative h-72 rounded-2xl overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=600&q=80" alt="Look destacado" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-brand-dark/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
+                        <i class="fas fa-search-plus text-2xl"></i>
+                    </div>
+                </div>
+
+                <div onclick="openModal('https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?auto=format&fit=crop&w=1000&q=80', 'Look 4: Capas Ligeras de Otoño')" class="group relative h-72 rounded-2xl overflow-hidden cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?auto=format&fit=crop&w=600&q=80" alt="Look destacado" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-brand-dark/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
+                        <i class="fas fa-search-plus text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal image preview -->
+    <div id="image-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4" onclick="closeModal()">
+        <div class="relative max-w-2xl w-full bg-white rounded-2xl overflow-hidden" onclick="event.stopPropagation()">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-white bg-brand-dark/70 w-8 h-8 rounded-full flex items-center justify-center z-10">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="modal-img" src="" alt="Ampliada" class="w-full max-h-[75vh] object-cover">
+            <div class="p-4 bg-white text-center">
+                <p id="modal-caption" class="font-serif text-lg font-bold text-brand-dark"></p>
+                <p class="text-xs text-brand-400 mt-1">Inspírate para recrearlo con tus prendas básicas</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. FAQS SECTION (Accordion) -->
+    <section class="py-20 bg-white border-t border-brand-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-xs uppercase tracking-widest font-bold text-brand-400">Resuelve tus dudas</span>
+                <h2 class="font-serif text-3xl font-bold text-brand-dark mt-1">Preguntas Frecuentes</h2>
+                <div class="w-12 h-0.5 bg-brand-300 mx-auto mt-3"></div>
+            </div>
+
+            <!-- Accordion Items -->
+            <div class="space-y-4">
+                <!-- FAQ 1 -->
+                <div class="border border-brand-100 rounded-2xl overflow-hidden bg-brand-bg transition-all">
+                    <button onclick="toggleFaq(1)" class="w-full p-5 text-left flex items-center justify-between font-serif font-semibold text-brand-dark hover:text-brand-400 transition-colors">
+                        <span>1. ¿Con qué frecuencia se publican nuevas guías y artículos?</span>
+                        <i id="faq-icon-1" class="fas fa-chevron-down text-xs text-brand-400 transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-content-1" class="hidden px-5 pb-5 text-sm text-brand-500 leading-relaxed border-t border-brand-100/50 pt-3">
+                        Publicamos contenido nuevo diariamente. Cada mañana encuentras recomendaciones actualizadas de outfits pensadas en las tendencias del momento y las variaciones del clima.
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="border border-brand-100 rounded-2xl overflow-hidden bg-brand-bg transition-all">
+                    <button onclick="toggleFaq(2)" class="w-full p-5 text-left flex items-center justify-between font-serif font-semibold text-brand-dark hover:text-brand-400 transition-colors">
+                        <span>2. ¿Cómo encuentro un outfit apto para mi clima si en mi ciudad hace mucho calor o llueve?</span>
+                        <i id="faq-icon-2" class="fas fa-chevron-down text-xs text-brand-400 transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-content-2" class="hidden px-5 pb-5 text-sm text-brand-500 leading-relaxed border-t border-brand-100/50 pt-3">
+                        En el menú principal o en el bloque de "Categorías Rápidas & Clima" del inicio, puedes filtrar directamente según tu temperatura actual (calor, fresco o lluvia) para ver solo las combinaciones funcionales para tu día.
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="border border-brand-100 rounded-2xl overflow-hidden bg-brand-bg transition-all">
+                    <button onclick="toggleFaq(3)" class="w-full p-5 text-left flex items-center justify-between font-serif font-semibold text-brand-dark hover:text-brand-400 transition-colors">
+                        <span>3. ¿Necesito comprar ropa nueva para replicar las combinaciones de Trama Style?</span>
+                        <i id="faq-icon-3" class="fas fa-chevron-down text-xs text-brand-400 transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-content-3" class="hidden px-5 pb-5 text-sm text-brand-500 leading-relaxed border-t border-brand-100/50 pt-3">
+                        No. Todas nuestras guías están pensadas para maximizar las prendas básicas y versátiles que ya tienes en tu armario, enseñándote a combinarlas de formas diferentes y sofisticadas.
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="border border-brand-100 rounded-2xl overflow-hidden bg-brand-bg transition-all">
+                    <button onclick="toggleFaq(4)" class="w-full p-5 text-left flex items-center justify-between font-serif font-semibold text-brand-dark hover:text-brand-400 transition-colors">
+                        <span>4. ¿Los artículos incluyen recomendaciones de calzado y accesorios?</span>
+                        <i id="faq-icon-4" class="fas fa-chevron-down text-xs text-brand-400 transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-content-4" class="hidden px-5 pb-5 text-sm text-brand-500 leading-relaxed border-t border-brand-100/50 pt-3">
+                        Sí. Cada post analiza el look completo: desde la prenda principal (vestidos, pantalones o camisas) hasta el calzado ideal (tacones, botas o tenis) y los accesorios que mejor contrastan.
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="border border-brand-100 rounded-2xl overflow-hidden bg-brand-bg transition-all">
+                    <button onclick="toggleFaq(5)" class="w-full p-5 text-left flex items-center justify-between font-serif font-semibold text-brand-dark hover:text-brand-400 transition-colors">
+                        <span>5. ¿Puedo sugerir un tema o pedir una recomendación específica para un evento?</span>
+                        <i id="faq-icon-5" class="fas fa-chevron-down text-xs text-brand-400 transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-content-5" class="hidden px-5 pb-5 text-sm text-brand-500 leading-relaxed border-t border-brand-100/50 pt-3">
+                        ¡Claro que sí! Puedes ir a nuestra pestaña de "Contacto" o escribirnos a través de nuestras redes sociales para contarnos qué ocasión tienes y lo tomaremos en cuenta para nuestros próximos artículos.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. FOOTER WITH NEWSLETTER CAPTURE -->
+    </div>
+    <!-- /home-view -->
+
+    <main id="legal-view" class="hidden-view">
+        <section class="bg-gradient-to-b from-brand-100/40 to-brand-bg py-16 sm:py-20 border-b border-brand-100">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <a href="#inicio" class="btn-anim inline-flex items-center text-xs font-semibold uppercase tracking-widest text-brand-400 hover:text-brand-dark mb-8"><i class="fas fa-arrow-left mr-2"></i> Volver al inicio</a>
+                <h1 class="font-serif text-4xl sm:text-5xl font-bold text-brand-dark">Avisos <span class="italic font-normal text-brand-400">Legales</span></h1>
+                <div class="w-16 h-0.5 bg-brand-300 mx-auto mt-5 mb-8"></div>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <a href="#propiedad-intelectual" class="btn-anim bg-white border border-brand-300 text-brand-500 hover:bg-brand-100/40 px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-wider transition-all">Propiedad Intelectual</a>
+                    <a href="#politica-privacidad" class="btn-anim bg-brand-500 hover:bg-brand-dark text-white px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-wider transition-all">Política de Privacidad</a>
+                </div>
+            </div>
+        </section>
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
+            <article id="propiedad-intelectual" class="scroll-mt-28 bg-white border border-brand-100 rounded-3xl p-8 sm:p-10 editorial-shadow">
+                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-dark mb-8">Propiedad Intelectual y Fotografías</h2>
+                <div class="space-y-8">
+                    <div><h3 class="font-serif text-xl font-bold text-brand-dark mb-3">1. Contenidos Propios</h3><p class="text-sm sm:text-base text-brand-500 leading-relaxed">Todos los textos, logotipos, diseños y marcas aquí presentados son propiedad intelectual de Trama Style, protegidos por las leyes de derechos de autor. Queda prohibida su reproducción total o parcial sin autorización previa.</p></div>
+                    <div><h3 class="font-serif text-xl font-bold text-brand-dark mb-3">2. Uso de Material Fotográfico</h3>
+                        <p class="text-sm sm:text-base text-brand-500 leading-relaxed">Las imágenes de carácter editorial y de stock utilizadas en este sitio web provienen de plataformas de contenido libre y gratuito bajo licencia de uso público (tales como Unsplash), empleadas con fines puramente ilustrativos, estéticos y de inspiración de moda.</p>
+                        <p class="text-sm sm:text-base text-brand-500 leading-relaxed" style="margin-top:.75rem">Los derechos de autor de dichas fotografías pertenecen a sus respectivos autores y creadores originales. Trama Style no reclama la propiedad de las fotografías de terceros utilizadas bajo estas licencias de uso libre. Si algún creador o titular de derechos considera que alguna imagen debe ser retirada o debidamente acreditada, puede ponerse en contacto con nosotros a través de nuestros canales oficiales para resolverlo de inmediato.</p></div>
+                    <div><h3 class="font-serif text-xl font-bold text-brand-dark mb-3">3. Uso No Comercial</h3><p class="text-sm sm:text-base text-brand-500 leading-relaxed">El contenido visual y escrito publicado en Trama Style tiene un propósito informativo y de inspiración personal. Los usuarios pueden visualizar, compartir y utilizar las guías de estilo para uso exclusivamente personal y no comercial.</p></div>
+                </div>
+            </article>
+            <article id="politica-privacidad" class="scroll-mt-28 bg-white border border-brand-100 rounded-3xl p-8 sm:p-10 editorial-shadow">
+                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-dark mb-8">Política de Privacidad</h2>
+                <div class="space-y-8">
+                    <div><h3 class="font-serif text-xl font-bold text-brand-dark mb-3">1. Responsable del Tratamiento de Datos</h3><p class="text-sm sm:text-base text-brand-500 leading-relaxed">En cumplimiento de la normativa de protección de datos, te informamos que Trama Style es el responsable del tratamiento de los datos personales recopilados a través de este sitio web.</p></div>
+                    <div><h3 class="font-serif text-xl font-bold text-brand-dark mb-3">2. Datos que Recopilamos y Finalidad</h3><p class="text-sm sm:text-base text-brand-500 leading-relaxed">En Trama Style recopilamos únicamente los datos estrictamente necesarios para ofrecerte la mejor experiencia editorial:</p><p class="text-sm sm:text-base text-brand-500 leading-relaxed" style="margin-top:.75rem"><strong class="text-brand-dark">Datos de Navegación:</strong> Recopilamos datos anónimos de uso y cookies técnicas necesarias para el correcto funcionamiento de la página web y su visualización en diferentes dispositivos.</p></div>
+                    <div><h3 class="font-serif text-xl font-bold text-brand-dark mb-3">3. Legitimación</h3><p class="text-sm sm:text-base text-brand-500 leading-relaxed">El tratamiento de tus datos se realiza con tu consentimiento explícito al suscribirte voluntariamente a nuestro boletín o al interactuar con los formularios de contacto y suscripción del sitio web.</p></div>
+                    <div><h3 class="font-serif text-xl font-bold text-brand-dark mb-3">4. Cesión de Datos a Terceros</h3><p class="text-sm sm:text-base text-brand-500 leading-relaxed">Trama Style no vende, alquila ni cede tus datos personales a terceros. Para el envío del boletín informativo utilizamos plataformas de gestión de correo electrónico seguras que cumplen con los estándares de privacidad vigentes.</p></div>
+                    <div><h3 class="font-serif text-xl font-bold text-brand-dark mb-3">5. Tus Derechos</h3><p class="text-sm sm:text-base text-brand-500 leading-relaxed">Como usuario, tienes derecho a:</p><ul class="mt-3 space-y-2 text-sm sm:text-base text-brand-500"><li class="flex gap-3"><i class="fas fa-check text-brand-300 mt-1.5 text-xs"></i>Acceder, rectificar o solicitar la supresión de tus datos personales.</li><li class="flex gap-3"><i class="fas fa-check text-brand-300 mt-1.5 text-xs"></i>Retirar tu consentimiento en cualquier momento.</li></ul></div>
+                    <div><h3 class="font-serif text-xl font-bold text-brand-dark mb-3">6. Modificaciones de la Política de Privacidad</h3><p class="text-sm sm:text-base text-brand-500 leading-relaxed">Trama Style se reserva el derecho a modificar la presente política para adaptarla a novedades legislativas o técnicas, recomendando a los usuarios su revisión periódica.</p></div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer id="site-footer" class="bg-brand-dark text-white pt-16 pb-12 border-t border-brand-500/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Footer Links & Info -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-brand-500/30">
+                <!-- Brand Info -->
+                <div class="space-y-3">
+                    <a href="#" class="font-serif text-2xl tracking-wider font-bold text-white">
+                        TRAMA<span class="font-light italic text-brand-200">STYLE</span>
+                    </a>
+                    <p class="text-xs text-brand-200/80 leading-relaxed font-light">
+                        Blog informativo de moda y estilo de vida. Guías diarias reales adaptadas al clima y optimización de armario.
+                    </p>
+                </div>
+
+                <!-- Navigation -->
+                <div>
+                    <h4 class="font-serif text-sm font-semibold text-brand-100 uppercase tracking-wider mb-4">Navegación</h4>
+                    <ul class="space-y-2 text-xs text-brand-200/80">
+                        <li><a href="#inicio" class="hover:text-white transition-colors">Inicio</a></li>
+                        <li><a href="#tendencias" class="hover:text-white transition-colors">Tendencias</a></li>
+                        <li><a href="#clima" class="hover:text-white transition-colors">Clima & Outfits</a></li>
+                        <li><a href="#articulos" class="hover:text-white transition-colors">Artículos</a></li>
+                    </ul>
+                </div>
+
+                <!-- Social -->
+                <div>
+                    <h4 class="font-serif text-sm font-semibold text-brand-100 uppercase tracking-wider mb-4">Redes Sociales</h4>
+                    <a href="https://pin.it/3wLqZhxrK" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs text-brand-200/80 hover:text-white transition-colors">
+                        <i class="fab fa-pinterest-p mr-2 text-brand-300"></i> Síguenos en Pinterest
+                    </a>
+                </div>
+
+                <!-- Legal -->
+                <div id="contacto">
+                    <h4 class="font-serif text-sm font-semibold text-brand-100 uppercase tracking-wider mb-4">Avisos Legales</h4>
+                    <ul class="space-y-2 text-xs text-brand-200/80">
+                        <li><a href="#politica-privacidad" class="hover:text-white transition-colors">Política de Privacidad</a></li>
+                        <li><a href="#propiedad-intelectual" class="hover:text-white transition-colors">Propiedad Intelectual</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="pt-8 text-center text-xs text-brand-200/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p>&copy; 2026 Trama Style. Todos los derechos reservados.</p>
+                <p class="font-light">Diseño Editorial Minimalista para Moda Real</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Vanilla JavaScript Functionality -->
+    <script>
+        // 1. Mobile Navigation Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 2. Category Quick Filters
+        function filterCategory(cat) {
+            const items = document.querySelectorAll('.category-item');
+            const buttons = document.querySelectorAll('.cat-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-brand-500', 'text-white');
+                btn.classList.add('bg-white', 'text-brand-500');
+            });
+
+            event.target.classList.remove('bg-white', 'text-brand-500');
+            event.target.classList.add('bg-brand-500', 'text-white');
+
+            items.forEach(item => {
+                if (cat === 'all' || item.classList.contains(cat)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // 3. Image Modal Gallery
+        function openModal(imgSrc, caption) {
+            document.getElementById('modal-img').src = imgSrc;
+            document.getElementById('modal-caption').innerText = caption;
+            const modal = document.getElementById('image-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('image-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // 4. FAQ Accordion Toggle
+        function toggleFaq(index) {
+            const content = document.getElementById(`faq-content-${index}`);
+            const icon = document.getElementById(`faq-icon-${index}`);
+
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                content.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        // 5. Pestaña de Avisos Legales (vista separada del home)
+        const homeView = document.getElementById('home-view');
+        const legalView = document.getElementById('legal-view');
+        const legalIds = ['avisos-legales', 'propiedad-intelectual', 'politica-privacidad'];
+        const homeTitle = document.title;
+        function route() {
+            const id = decodeURIComponent(location.hash.slice(1));
+            const isLegal = legalIds.includes(id);
+            homeView.classList.toggle('hidden-view', isLegal);
+            legalView.classList.toggle('hidden-view', !isLegal);
+            document.title = isLegal ? 'Avisos Legales | Trama Style' : homeTitle;
+            const target = id && id !== 'avisos-legales' ? document.getElementById(id) : null;
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            else window.scrollTo({ top: 0 });
+            if (!isLegal) revealAll();
+        }
+        window.addEventListener('hashchange', route);
+
+        // 6. Animaciones al bajar (botones, figuras, tarjetas)
+        const tag = (sel, cls, step) => document.querySelectorAll(sel).forEach((el, i) => {
+            el.classList.add(cls); el.style.setProperty('--d', ((i % 4) * step) + 's');
+        });
+        tag('#home-view h2, #home-view h3, #home-view p, #home-view .editorial-shadow, #home-view article, #home-view .vehicle-card, #home-view [onclick^="openModal"], #home-view .rounded-2xl.overflow-hidden.bg-brand-bg', 'rv', .09);
+        tag('#home-view a[class*="rounded-full"], #home-view button.cat-btn', 'rv', .08);
+        tag('#home-view .w-12.h-12', 'rv-pop', .1);
+        document.querySelectorAll('#home-view .w-12.h-0\\.5, #home-view .w-16.h-0\\.5').forEach(el => el.classList.add('rv-line'));
+        document.querySelectorAll('a[class*="rounded-full"], button[class*="rounded-full"]').forEach(el => el.classList.add('btn-anim'));
+        let io;
+        function revealAll() {
+            if (!('IntersectionObserver' in window)) { document.querySelectorAll('.rv,.rv-pop,.rv-line').forEach(e => e.classList.add('in')); return; }
+            io = io || new IntersectionObserver((entries) => entries.forEach(en => {
+                if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+            }), { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+            document.querySelectorAll('.rv:not(.in),.rv-pop:not(.in),.rv-line:not(.in)').forEach(e => io.observe(e));
+        }
+        route();
+        revealAll();
+    </script>
+</body>
+</html>
